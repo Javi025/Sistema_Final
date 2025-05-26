@@ -1,16 +1,16 @@
 <?php
-/* Se declara la clase LoginService, que se encargará de manejar el proceso de inicio de sesión */
-// La propiedad privada $usuarioRepository almacenará una instancia de UsuarioRepository (es decir, el acceso a la base de datos).
+/* Se declara la clase ServicioInicioSesion, que se encargará de manejar el proceso de inicio de sesión */
+// La propiedad privada $repositorio almacenará una instancia de RepositorioUsuario(es decir, el acceso a la base de datos).
 class ServicioInicioSesion {
     private $repositorio;
     /* Constructor con inyección de dependencias */
     // Define el constructor __construct().
-    // Recibe como parámetro un objeto UsuarioRepository, que se inyecta desde fuera.
+    // Recibe como parámetro un objeto RepositorioUsuario, que se inyecta desde fuera.
     // Esto permite usar los métodos para buscar usuarios sin tener que conectarse directamente a la base de datos.
     public function __construct(RepositorioUsuario $repositorio) {
         $this->repositorio = $repositorio;
     }
-    /* Método público llamado login. */
+    /* Método público llamado iniciarSesion. */
     // Recibe dos parámetros:
     // $email: el correo del usuario (tipo string).
     // $password: la contraseña que el usuario escribió en el formulario.
@@ -27,6 +27,8 @@ class ServicioInicioSesion {
         // ¿El usuario fue encontrado?
         // ¿La contraseña que escribió el usuario coincide con la que está en la base de datos?
         // password_verify($password, $usuario->getPasswordHash()) compara la contraseña normal con la contraseña encriptada que se guardó al registrarse.
+        // password_verify es una función de PHP que verifica si una contraseña coincide con un hash de contraseña generado previamente. 
+        //Es una forma segura de comparar contraseñas almacenadas encriptadas con la contraseña ingresada por el usuario. 
         if ($usuario && password_verify($password, $usuario->getPasswordHash())) {
             /* Si la contraseña es correcta, crea una sesión para el usuario. */
             // Se guarda el id del usuario en $_SESSION['usuario_id'].

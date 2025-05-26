@@ -1,5 +1,5 @@
 <?php
-/* Se declara una clase llamada UsuarioRepository. Su responsabilidad única es trabajar con la base de datos (guardar y buscar usuarios). */
+/* Se declara una clase llamada RepositorioUsuario. Su responsabilidad única es trabajar con la base de datos (guardar y buscar usuarios). */
 class RepositorioUsuario{
     /* Se declara una propiedad privada $conexion, que almacenará el objeto mysqli. */
     private $conexion;
@@ -15,12 +15,13 @@ class RepositorioUsuario{
     // Devuelve un bool: true si lo guardó, false si falló.
     public function guardar(ModeloUsuario $usuario): bool {// : bool, Tipo de valor que devuelve la función
         // Se define una consulta SQL. El signo ? indica que se usarán parámetros preparados (evita SQL injection).
+        // $sql, variable que se utiliza para almacenar una sentencia SQL que se va a ejecutar una base de datos 
         $sql = "INSERT INTO usuarios (nombre, email, password) VALUES (?, ?, ?)";
         // Prepara la consulta con la conexión que ya tenemos.
         // prepare(), Prepara una consulta SQL con seguridad (protege contra inyecciones)
         $stmt = $this->conexion->prepare($sql);
         // Enlaza los valores reales a los ? de la consulta. "sss" indica que son 3 strings (string, string, string).
-        // Usa los getters del objeto Usuario para obtener los datos.
+        // Usa los getters del objeto ModeloUsuario para obtener los datos.
         // bind_param("sss", ...), Une valores reales a los signos ? en SQL (s = string)
         $stmt->bind_param("sss", $usuario->getNombre(), $usuario->getEmail(), $usuario->getPasswordHash());
         // Ejecuta la consulta y devuelve true o false.
@@ -37,10 +38,10 @@ class RepositorioUsuario{
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $resultado = $stmt->get_result();
-        // Si encuentra una fila, crea un objeto Usuario con los datos de esa fila y lo retorna.
+        // Si encuentra una fila, crea un objeto ModeloUsuario con los datos de esa fila y lo retorna.
         // fetch_assoc(), Devuelve una fila de resultados como arreglo asociativo
         if ($fila = $resultado->fetch_assoc()) {
-            // new Usuario(...), Crea un nuevo objeto ModeloUsuario con los datos obtenidos
+            // new ModeloUsuario(...), Crea un nuevo objeto ModeloUsuario con los datos obtenidos
             return new ModeloUsuario($fila['nombre'], $fila['email'], $fila['password'], $fila['id']);
         }
         // Si no encuentra ningún usuario con ese email, retorna null.
@@ -70,5 +71,4 @@ $stmt se usa para realizar las siguientes acciones:
 * $stmt->bind_result(): Vincula variables para obtener resultados. 
 * $stmt->fetch(): Recupera los resultados de la consulta. 
 * $stmt->close(): Cierra la sentencia preparada y libera recursos. 
-
 */

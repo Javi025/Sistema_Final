@@ -12,9 +12,10 @@ class ConexionBD {
     private $baseDatos = 'sistema_final';// baseDatos: nombre de la base de datos.
 
     /* Declarar un método público llamado "obtener" que devuelve un objeto mysqli. */
-    // : tipoDeDato – Tipado de retorno, indica qué tipo de valor se devolverá.
+    // public significa que puedes usarla desde fuera de la clase.
+    // function: Indica que se trata de una función (método). 
     // Se espera que obtener() devuelva un objeto de tipo mysqli.
-    // Es una función que pertenece a una clase. public significa que puedes usarla desde fuera de la clase.
+    // : tipoDeDato – Tipado de retorno, indica qué tipo de valor se devolverá.
     // Significa: "cuando alguien quiera una conexión, le daré una instancia lista de mysqli".
     // Crea una nueva conexión a MySQL usando los datos almacenados en la clase.
     public function obtener(): mysqli {

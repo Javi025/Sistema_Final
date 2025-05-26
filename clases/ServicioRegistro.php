@@ -1,11 +1,11 @@
 <?php
-/* Se declara la clase RegisterService, que se encargará solo del registro de usuarios. */
-// Tiene una propiedad privada $usuarioRepository, que guardará una instancia del repositorio para interactuar con la base de datos.
+/* Se declara la clase ServicioRegistro  que se encargará solo del registro de usuarios. */
+// Tiene una propiedad privada $repositorio, que guardará una instancia del repositorio para interactuar con la base de datos.
 class ServicioRegistro {
     private $repositorio;// Propiedad privada para almacenar una dependencia
     /* Constructor con inyección de dependencia */
-    // El constructor recibe un objeto de tipo UsuarioRepository.
-    // Lo almacena en la propiedad privada $usuarioRepository para usarlo más adelante.
+    // El constructor recibe un objeto de tipo RepositorioUsuario.
+    // Lo almacena en la propiedad privada $repositorio para usarlo más adelante.
     // Esto se llama inyección de dependencias y permite que esta clase no esté acoplada a una clase específica, haciendo el sistema más flexible.
     public function __construct(RepositorioUsuario $repositorio) {// Recibe e inyecta una instancia desde fuera (inyección de dependencias)
         $this->repositorio = $repositorio;

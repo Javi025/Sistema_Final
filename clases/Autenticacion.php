@@ -1,5 +1,5 @@
 <?php
-/* Se define una clase llamada Auth. */
+/* Se define una clase llamada Autenticacion. */
 // Su única responsabilidad es manejar la sesión del usuario (si está o no logueado, y permitir cerrar sesión).
 class Autenticacion{
     /* Método estaAutenticado() */
@@ -7,21 +7,21 @@ class Autenticacion{
     // Usa isset() para saber si existe $_SESSION['usuario_id'], lo que indica que el login fue exitoso.
     // Devuelve true si el usuario está logueado, o false si no.
     // static: el método se puede usar sin crear un objeto.
-    public static function estaAutenticado(): bool {
+    public static function estaAutenticado(): bool {// ¿Está logueado?
         return isset($_SESSION['usuario_id']);
     }
     /* Método cerrarSesion() */
     // Este método cierra la sesión del usuario.
     // session_unset() borra las variables.
     // session_destroy() borra completamente la sesión activa.
-    public static function cerrarSesion(): void {
+    public static function cerrarSesion(): void {// ¿Puede cerrar sesión?
         session_unset();// Limpia todas las variables de sesión
         session_destroy();// Destruye la sesión
     }
     /* Método obtenerEmail() */
     // Este método devuelve el email del usuario actual si está logueado.
     // Usa el operador ?? para devolver null si no existe.
-    public static function obtenerEmail(): ?string {
+    public static function obtenerEmail(): ?string {// ¿Puedo saber quién está logueado?
         return $_SESSION['usuario_email'] ?? null;
     }
 }
