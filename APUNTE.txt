@@ -1,0 +1,11 @@
+Clase 1: Conexion.php
+
+Conceptos importantes:
+
+Clase y objeto (Conexion)
+Encapsulamiento: propiedades privadas (private)
+Método: función dentro de una clase (obtener)
+Instanciación: crear una nueva conexión new mysqli(...)
+Manejo de errores con excepciones (throw new Exception)
+Tipo de retorno (: mysqli)
+
